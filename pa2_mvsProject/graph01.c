@@ -1,0 +1,98 @@
+/*
+graph01.c
+Ben Donn
+bdonn
+pa2
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "intVec.h"
+//global varialbes
+int n; //number of nodes
+int m = 0; //number of edges
+int tempInt;
+int dataValue;
+float weight;
+char tempDataValue[10];
+char tempWeight[10];
+FILE *inputFile = NULL;
+char tempString[20];
+char tempToken[10];
+char *tempInputString;
+char *readMode = "r+";
+char **linesOfFile;
+
+
+IntVec *linkedListArray;
+
+int main( int argc, char **argv)
+{
+	if (argc == 1) //no command line argument
+	{
+		fprintf(stderr, "Error: no command line arguments.");
+		exit(EXIT_FAILURE);
+	}
+
+	tempInputString = argv[1];
+	inputFile = fopen(tempInputString, readMode); //create file
+	
+	if (inputFile == 0)
+		perror("fopen(): ");
+	
+	fscanf(inputFile, "%s", tempString); //load first line
+	n = (int)tempString[0] - (int)'0'; //convert string to int.
+	tempString[0] = '\0';  //clear tempstring first char
+
+
+	linkedListArray = calloc(n+1, sizeof(IntVec));  //creates array of vector nodes
+	for (int i = 0; i <= n; i++)  //fill array with vector nodes
+	{
+		linkedListArray[i] = intMakeEmptyVec();
+	}
+	//below is some input file cleanup
+	for (int i = 0; i < 1; i++)
+		fgets(tempString, 20, inputFile);
+
+	//now time to read each line of input and load array as we go.
+	while((fgets(tempString, 20, inputFile) != NULL)) //for each line of the file.
+	{
+		if(tempString[0] == '\n') //if fgets needed to clear newline character
+			fgets(tempString, 20, inputFile);
+
+		sscanf(tempString, "%s %s %s", tempToken, tempDataValue, tempWeight);
+		//get first token
+		tempInt = (int)tempToken[0] - (int)'0';
+		//get second token
+		dataValue = (int)tempDataValue[0] - (int)'0';
+		//if there is a weight
+		if (!((float)tempWeight[0] == 0.00))
+			weight = (float)tempWeight[0] - (float)'0';
+
+		intVecPush(linkedListArray[tempInt], dataValue); //add element in proper location.
+		m += 1;
+		
+	}
+	//Time for printing
+	fprintf(stdout, "n = %d\nm = %d\n", n, m);
+	for (int w = 1; w <= n; w++) //for each node
+	{
+		printf("%d		[", (w));
+		for (int u = 0; u < intSize(linkedListArray[w]); u++) //for each edge from that node
+		{
+			printf("%d",intData(linkedListArray[w], u)); 
+			
+			if (u<intSize(linkedListArray[w])-1) //if its not the last element
+			{
+				printf(", ");
+			}
+		}
+		printf("]\n");
+	}
+	fclose(inputFile);
+	for(int i = 0; i<=n; i++)
+		free(linkedListArray[i]);
+	free(linkedListArray);
+	getc(stdin);
+}

@@ -110,6 +110,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graph01.c" />
+    <ClCompile Include="intVec.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="intVec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
