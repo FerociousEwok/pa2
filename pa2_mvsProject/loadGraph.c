@@ -19,14 +19,10 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 	return NULL;
 }
 
-printAdjVerts(IntVec *adjList)
+printAdjVerts(IntVec *adjList) //Done
 {
 	int n, m = 0;
-	n = sizeof(adjList); //the 0 index is not a vector, so subtract one for number of vectors.
-	n -= 1;
-	//adding up number of edges
-	for (int i = n; i > 0; i--)
-		m += intSize(adjList[i]);
+	m = getEdgeCount(adjList);
 	fprintf(stdout, "n = %d\nm = %d\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
 	{
@@ -34,7 +30,6 @@ printAdjVerts(IntVec *adjList)
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
 			fprintf(stdout, "%d", intData(adjList[w], u));
-
 			if (u<intSize(adjList[w]) - 1) //if its not the last element
 				fprintf(stdout, ", ");
 		}
@@ -52,7 +47,7 @@ printAdjMatrix(int** adjMatrix)
 The below function callocs an array of vectors and fills it based on inputFile
 	then returns a pointer to the array.
 */
-IntVec* loadGraph(FILE *inputFile) //process inputfile and store in adjList array
+IntVec* loadGraph(FILE *inputFile) //Done
 {
 	//local variables
 	int nodeCount = 0, edgeCount = 0, tempInt = 0, dataValue = 0;
@@ -89,11 +84,20 @@ IntVec* loadGraphUndirected(FILE *inputFile)
 
 }
 
-int getNodeCount(FILE *inputFile)
+int getNodeCount(FILE *inputFile) //Done
 {
 	char *tempString;
-
 	fscanf(inputFile, "%s", tempString); //load first line
 	return ((int)tempString[0] - (int)'0'); //convert string to int.
-	//tempString[0] = '\0';  //dont need to clear tempstring anymore. due to encapsulation.
+}
+
+int getEdgeCount(IntVec *adjList)
+{
+	int n, m = 0;
+	n = sizeof(adjList); //the 0 index is not a vector, so subtract one for number of vectors.
+	n -= 1;
+	//adding up number of edges
+	for (int i = n; i > 0; i--)
+		m += intSize(adjList[i]);
+	return m;
 }

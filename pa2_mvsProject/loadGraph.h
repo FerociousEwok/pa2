@@ -25,3 +25,6 @@ int getNodeCount(FILE *inputFile);
 
 /**/
 IntVec* loadGraphUndirected(FILE *inputFile);
+
+/**/
+int getEdgeCount(IntVec *adjList);

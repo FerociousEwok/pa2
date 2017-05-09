@@ -30,8 +30,6 @@ char *readMode = "r+";
 char **linesOfFile;
 
 
-
-
 int main(int argc, char **argv)
 {
 	//variables
@@ -45,17 +43,14 @@ int main(int argc, char **argv)
 		getc(stdin);
 		exit(0);
 	}
-	else if (argc == 2) //if there is a -U flag
-	{
+	else if (argc == 2) //if there is not a -U flag
 		tempInputString = argv[1];
-	}
-	else if (argc == 3)
+	else if (argc == 3) //flag given
 	{
 		flag = argv[1];
 		tempInputString = argv[2];
 	}
 	inputFile = fopen(tempInputString, readMode); //create file
-
 	if (inputFile == 0)
 	{
 		fprintf(stderr, "fopen() error\nPress any key to close: ");
