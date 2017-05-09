@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 {
 	//variables
 	IntVec *adjList;
-	char *flag;
+	char *flag = "Ben Donn";
 	int nodeCount = 0;
 
 	if (argc == 1) //no command line argument
@@ -61,8 +61,16 @@ int main(int argc, char **argv)
 		//exit(1);
 	}
 
-	nodeCount = getNodeCount(inputFile);//function to be defined
-	adjList = loadGraph(inputFile); //load all edges into array of vector nodes.
+	nodeCount = getNodeCount(inputFile);
+	if (flag == "Ben Donn") //this could cause errors----------------------------------
+		adjList = loadGraph(inputFile);
+	else if (flag == "-U")
+		adjList = loadGraphUndirected(); //to be defined
+	else
+	{
+		fprintf(stdout, "Error reading command line input\nClosing...");
+		exit(1);
+	}
 
 	/* now in loadGraph.c-----------------------------------------------------------
 
