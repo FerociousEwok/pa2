@@ -31,7 +31,7 @@ char **linesOfFile;
 
 
 
-int main( int argc, char **argv)
+int main(int argc, char **argv)
 {
 	//variables
 	IntVec *adjList;
@@ -52,19 +52,19 @@ int main( int argc, char **argv)
 		tempInputString = argv[2];
 	}
 	inputFile = fopen(tempInputString, readMode); //create file
-	
+
 	if (inputFile == 0)
 	{
 		fprintf(stderr, "fopen() error");
 		//exit(1);
 	}
-	
+
 	fscanf(inputFile, "%s", tempString); //load first line
 	n = (int)tempString[0] - (int)'0'; //convert string to int.
 	tempString[0] = '\0';  //clear tempstring first char
 
 
-	adjList = calloc(n+1, sizeof(IntVec));  //creates array of vector nodes
+	adjList = calloc(n + 1, sizeof(IntVec));  //creates array of vector nodes
 	for (int i = 0; i <= n; i++)  //fill array with vector nodes
 	{
 		adjList[i] = intMakeEmptyVec();
@@ -74,9 +74,9 @@ int main( int argc, char **argv)
 		fgets(tempString, 20, inputFile);
 
 	//now time to read each line of input and load array as we go.
-	while((fgets(tempString, 20, inputFile) != NULL)) //for each line of the file.
+	while ((fgets(tempString, 20, inputFile) != NULL)) //for each line of the file.
 	{
-		if(tempString[0] == '\n') //if fgets needed to clear newline character
+		if (tempString[0] == '\n') //if fgets needed to clear newline character
 			fgets(tempString, 20, inputFile);
 
 		sscanf(tempString, "%s %s %s", tempToken, tempDataValue, tempWeight);
@@ -90,8 +90,10 @@ int main( int argc, char **argv)
 
 		intVecPush(adjList[tempInt], dataValue); //add element in proper location.
 		m += 1;
-		
+
 	}
+	printAdjVerts(adjList);
+}
 	/*printing no longer supported here
 	
 	//Time for printing
