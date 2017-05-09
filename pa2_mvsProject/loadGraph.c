@@ -62,10 +62,10 @@ printAdjMatrix(int** adjMatrix, int nodeCount)
 	{
 		fprintf(stdout, "%d ", i);//horizontal index
 	}
-	fprintf(stdout, "\n   ------------------\n");
+	fprintf(stdout, "\n   ------------------");
 	for (int i = 1; i <= nodeCount; i++) //for each adjList[i]
 	{
-		fprintf(stdout, "%d :  ", i);
+		fprintf(stdout, "\n%d :  ", i);
 		for (int j = 1; j <= nodeCount; j++) //for each potential edge
 		{
 			fprintf(stdout, "%d  ", adjMatrix[i][j]);
