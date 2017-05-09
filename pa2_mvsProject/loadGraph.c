@@ -1,8 +1,8 @@
-#include "intVec.h"
-#include "loadGraph.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "intVec.h"
+#include "loadGraph.h"
 /*
 loadGraph.c
 Ben Donn
@@ -11,7 +11,7 @@ bdonn
 
 int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
-	int** adjMatrix;
+	int** adjMatrix = NULL;
 	//first initilize all values to 0.
 	for (int i = 1; i <= nodeCount; i++)//for each node. i.e. each index of array.
 	{
@@ -31,7 +31,7 @@ int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 
 IntVec* transposeGraph(IntVec* adjList, int n)
 {
-	IntVec* transposedList;
+	IntVec* transposedList = NULL;
 	for (int i = 0; i <= n; i++) //initialize a new array of vectors.
 	{
 		transposedList[i] = intMakeEmptyVec();
@@ -48,7 +48,7 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 
 void printAdjVerts(IntVec *adjList, int nodeCount) //Done
 {
-	int n, m = 0;
+	int n = nodeCount, m = 0;
 	m = getEdgeCount(adjList);
 	//n = getNodeCount(adjList);
 
@@ -93,9 +93,10 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 {
 	//local variables
 	int tempInt = 0, dataValue = 0;
-	float weight;
-	IntVec *tempList;
-	char *lineOfFile, *tempToken, *tempDataValue, *tempWeight;
+	float weight = 0.00;
+	IntVec *tempList = NULL;
+	char *lineOfFile = "", *tempToken = "",
+		*tempDataValue = "", *tempWeight = "";
 
 	//nodeCount = getNodeCount(inputFile);
 	tempList = calloc(nodeCount + 1, sizeof(IntVec));
@@ -126,7 +127,7 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 
 int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 {
-	char *tempString;
+	char *tempString = "";
 	fscanf(inputFile, "%s", tempString); //load first line
 	return ((int)tempString[0] - (int)'0'); //convert string to int.
 }

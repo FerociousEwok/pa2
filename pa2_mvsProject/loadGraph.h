@@ -2,7 +2,7 @@
 loadGraph.h
 Ben Donn
 bdonn
-TODO: change all function parameters to not be pointer types.
+
 */
 
 #ifndef C101loadGraph
@@ -10,7 +10,7 @@ TODO: change all function parameters to not be pointer types.
 /*
 
 */
-int** makeAdjMatrix(IntVec *adjList, int nodeCount);
+int** makeAdjMatrix(IntVec *adjList, int nodeCount);//int nodeCount 
 
 /*
 
