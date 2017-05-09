@@ -5,6 +5,7 @@ bdonn
 pa2
 
 TODO: encapsulate global variables locally.
+
 */
 
 
@@ -14,8 +15,8 @@ TODO: encapsulate global variables locally.
 #include "intVec.h"
 #include "loadGraph.h"
 //global varialbes 
-int n; //number of nodes
-int m = 0; //number of edges
+//int n; //number of nodes
+//int m = 0; //number of edges
 int tempInt;
 int dataValue;
 float weight;
@@ -36,6 +37,7 @@ int main(int argc, char **argv)
 	//variables
 	IntVec *adjList;
 	char *flag;
+	int nodeCount = 0;
 
 	if (argc == 1) //no command line argument
 	{
@@ -58,6 +60,10 @@ int main(int argc, char **argv)
 		fprintf(stderr, "fopen() error");
 		//exit(1);
 	}
+
+	nodeCount = getNodeCount(inputFile);//function to be defined
+
+	/* now in loadGraph.c-----------------------------------------------------------
 
 	fscanf(inputFile, "%s", tempString); //load first line
 	n = (int)tempString[0] - (int)'0'; //convert string to int.
@@ -92,7 +98,8 @@ int main(int argc, char **argv)
 		m += 1;
 
 	}
-	printAdjVerts(adjList);
+	--------------------------------------------------------------------------------*/
+	printAdjVerts(adjList); //loadGraph.c
 }
 	/*printing no longer supported here
 	
