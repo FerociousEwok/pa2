@@ -69,8 +69,16 @@ int main(int argc, char **argv)
 			printAdjMatrix(makeAdjMatrix(adjList));
 	}
 
-
-	/* now in loadGraph.c-----------------------------------------------------------
+	//free allocated memory--------------------------------------------------------
+	for (int i = 0; i <= sizeof(adjList); i++)
+		free(adjList[i]);
+	free(adjList);
+	fprintf(stdout, "Program completed with no errors, exiting...");
+	delay(5000);//wait a few seconds then close
+	//getc(stdin);
+	return EXIT_SUCCESS;
+}
+	/* 
 
 	fscanf(inputFile, "%s", tempString); //load first line
 	n = (int)tempString[0] - (int)'0'; //convert string to int.
@@ -106,8 +114,9 @@ int main(int argc, char **argv)
 
 	}
 	--------------------------------------------------------------------------------*/
-	printAdjVerts(adjList); //loadGraph.c
-}
+	
+
+
 	/*printing no longer supported here
 	
 	//Time for printing

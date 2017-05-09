@@ -80,7 +80,7 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount) //Done
 	}
 	return tempList;
 }
-IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount) //very similar to loadGraph() but for each line of inputFile, edgeCount+=2.
+IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount) //edges go both ways; for each edge, edgeCount+=2.
 {
 	//local variables
 	int nodeCount = 0, tempInt = 0, dataValue = 0;
@@ -107,24 +107,25 @@ IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount) //very similar to lo
 		//if there is a weight
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
-		intVecPush(tempList[tempInt], dataValue);
+
+		intVecPush(tempList[tempInt], dataValue);//edge from tempInt vector to dataValue Vector.
+		intVecPush(tempList[dataValue], tempInt);//edge from dataValue vector to tempInt vector.
 	}
 	return tempList;
 }
 
-int getNodeCount(FILE *inputFile) //Done
+int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 {
 	char *tempString;
 	fscanf(inputFile, "%s", tempString); //load first line
 	return ((int)tempString[0] - (int)'0'); //convert string to int.
 }
 
-int getEdgeCount(IntVec *adjList) //Done
+int getEdgeCount(IntVec *adjList) //Can call multiple times.
 {
 	int n, m = 0;
-	n = sizeof(adjList); //the 0 index is not a vector, so subtract one for number of vectors.
+	n = sizeof(adjList);
 	n -= 1;
-	//adding up number of edges
 	for (int i = n; i > 0; i--)
 		m += intSize(adjList[i]);
 	return m;
