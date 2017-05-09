@@ -41,7 +41,8 @@ int main(int argc, char **argv)
 
 	if (argc == 1) //no command line argument
 	{
-		fprintf(stderr, "Error: no command line arguments.");
+		fprintf(stderr, "Error: no command line arguments.\nPress any key to close: ");
+		getc(stdin);
 		exit(0);
 	}
 	else if (argc == 2) //if there is a -U flag
@@ -57,18 +58,20 @@ int main(int argc, char **argv)
 
 	if (inputFile == 0)
 	{
-		fprintf(stderr, "fopen() error");
-		//exit(1);
+		fprintf(stderr, "fopen() error\nPress any key to close: ");
+		getc(stdin);
+		exit(1);
 	}
 
 	nodeCount = getNodeCount(inputFile);
 	if (flag == "Ben Donn") //this could cause errors----------------------------------
 		adjList = loadGraph(inputFile);
 	else if (flag == "-U")
-		adjList = loadGraphUndirected(); //to be defined
+		adjList = loadGraphUndirected(inputFile); //to be defined
 	else
 	{
-		fprintf(stdout, "Error reading command line input\nClosing...");
+		fprintf(stdout, "Error reading command line input\nPress any key to close: ");
+		getc(stdin);
 		exit(1);
 	}
 

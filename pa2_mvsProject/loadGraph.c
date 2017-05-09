@@ -60,27 +60,17 @@ IntVec* loadGraph(FILE *inputFile) //process inputfile and store in adjList arra
 	IntVec *tempList;
 	char *lineOfFile, *tempToken, *tempDataValue, *tempWeight;
 
-
 	nodeCount = getNodeCount(inputFile);
-
-
-
-
-	tempList = calloc(nodeCount + 1, sizeof(IntVec));  //creates array of vector nodes
-	for (int i = 0; i <= nodeCount; i++)  //fill array with vector nodes
-	{
+	tempList = calloc(nodeCount + 1, sizeof(IntVec));
+	for (int i = 0; i <= nodeCount; i++)
 		tempList[i] = intMakeEmptyVec();
-	}
 	//below is some input file cleanup
 	for (int i = 0; i < 1; i++)
 		fgets(lineOfFile, 20, inputFile);
-
-	//now time to read each line of input and load array as we go.
 	while ((fgets(lineOfFile, 20, inputFile) != NULL)) //for each line of the file.
 	{
 		if (lineOfFile[0] == '\n') //if fgets needed to clear newline character
 			fgets(lineOfFile, 20, inputFile);
-
 		sscanf(lineOfFile, "%s %s %s", tempToken, tempDataValue, tempWeight);
 		//get first token
 		tempInt = (int)tempToken[0] - (int)'0';
@@ -89,11 +79,14 @@ IntVec* loadGraph(FILE *inputFile) //process inputfile and store in adjList arra
 		//if there is a weight
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
-
-		intVecPush(tempList[tempInt], dataValue); //add element in proper location.
+		intVecPush(tempList[tempInt], dataValue);
 		edgeCount += 1;
 	}
 	return tempList;
+}
+IntVec* loadGraphUndirected(FILE *inputFile)
+{
+
 }
 
 int getNodeCount(FILE *inputFile)
