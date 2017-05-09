@@ -114,9 +114,11 @@
   <ItemGroup>
     <ClCompile Include="graph02.c" />
     <ClCompile Include="intVec.c" />
+    <ClCompile Include="loadGraph.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="intVec.h" />
+    <ClInclude Include="loadGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

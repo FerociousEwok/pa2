@@ -28,11 +28,12 @@ char *readMode = "r+";
 char **linesOfFile;
 
 
-IntVec *adjList;
+
 
 int main( int argc, char **argv)
 {
 	//variables
+	IntVec *adjList;
 	char *flag;
 
 	if (argc == 1) //no command line argument
