@@ -15,7 +15,7 @@ IntVec* transposeGraph(IntVec* origGraph, int n);
 printAdjVerts(IntVec *adjList);
 
 /**/
-printAdjMatrix(int** adjMatrix);
+printAdjMatrix(int** adjMatrix, int nodeCount);
 
 /**/
 IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag);

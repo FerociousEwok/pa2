@@ -55,9 +55,22 @@ printAdjVerts(IntVec *adjList) //Done
 	}
 }
 
-printAdjMatrix(int** adjMatrix)
+printAdjMatrix(int** adjMatrix, int nodeCount)
 {
-
+	fprintf(stdout, "     ");//alignment
+	for (int i = 1; i <= nodeCount; i++)
+	{
+		fprintf(stdout, "%d ", i);//horizontal index
+	}
+	fprintf(stdout, "\n   ------------------\n");
+	for (int i = 1; i <= nodeCount; i++) //for each adjList[i]
+	{
+		fprintf(stdout, "%d :  ", i);
+		for (int j = 1; j <= nodeCount; j++) //for each potential edge
+		{
+			fprintf(stdout, "%d  ", adjMatrix[i][j]);
+		}
+	}
 }
 
 

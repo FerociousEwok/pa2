@@ -57,13 +57,13 @@ int main(int argc, char **argv)
 
 	printAdjVerts(adjList);
 	if (nodeCount <= 20)
-		printAdjMatrix(makeAdjMatrix(adjList, nodeCount));
+		printAdjMatrix(makeAdjMatrix(adjList, nodeCount), nodeCount);
 	for (int i = 0; i < 2; i++) //run twice; second transpose
 	{
 		adjList = transposeGraph(adjList, nodeCount); //adjList now transposedAdjList.
 		printAdjVerts(adjList);
 		if (nodeCount <= 20)
-			printAdjMatrix(makeAdjMatrix(adjList, nodeCount));
+			printAdjMatrix(makeAdjMatrix(adjList, nodeCount), nodeCount);
 	}
 
 	//free allocated memory--------------------------------------------------------
