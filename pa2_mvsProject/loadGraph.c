@@ -37,17 +37,17 @@ printAdjVerts(IntVec *adjList)
 	fprintf(stdout, "n = %d\nm = %d\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
 	{
-		printf("%d		[", (w));
+		fprintf(stdout, "%d		[", (w));
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
-			printf("%d", intData(adjList[w], u));
+			fprintf(stdout, "%d", intData(adjList[w], u));
 
 			if (u<intSize(adjList[w]) - 1) //if its not the last element
 			{
-				printf(", ");
+				fprintf(stdout, ", ");
 			}
 		}
-		printf("]\n");
+		fprintf(stdout, "]\n");
 	}
 }
 printAdjMatrix(int** adjMatrix)

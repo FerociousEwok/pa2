@@ -92,6 +92,8 @@ int main( int argc, char **argv)
 		m += 1;
 		
 	}
+	/*printing no longer supported here
+	
 	//Time for printing
 	fprintf(stdout, "n = %d\nm = %d\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
@@ -114,3 +116,5 @@ int main( int argc, char **argv)
 	free(adjList);
 	getc(stdin);
 }
+
+*/
