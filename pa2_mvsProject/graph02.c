@@ -32,17 +32,30 @@ IntVec *linkedListArray;
 
 int main( int argc, char **argv)
 {
+	//variables
+	char *flag[2];
+
 	if (argc == 1) //no command line argument
 	{
 		fprintf(stderr, "Error: no command line arguments.");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
-
-	tempInputString = argv[1];
+	else if (argc == 2) //if there is a -U flag
+	{
+		tempInputString = argv[1];
+	}
+	else if (argc == 3)
+	{
+		flag = argv[1];
+		tempInputString = argv[2];
+	}
 	inputFile = fopen(tempInputString, readMode); //create file
 	
 	if (inputFile == 0)
+	{
 		perror("fopen(): ");
+		//exit(1);
+	}
 	
 	fscanf(inputFile, "%s", tempString); //load first line
 	n = (int)tempString[0] - (int)'0'; //convert string to int.
