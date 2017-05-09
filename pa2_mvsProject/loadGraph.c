@@ -11,7 +11,9 @@ bdonn
 
 int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
-	int** adjMatrix = NULL;
+	int** adjMatrix = calloc(nodeCount, sizeof(int *)); //of by on potential
+	for (int i = 0; i <= nodeCount; i++)
+		adjMatrix[i] = calloc(nodeCount, sizeof(int));
 	//first initilize all values to 0.
 	for (int i = 1; i <= nodeCount; i++)//for each node. i.e. each index of array.
 	{
@@ -31,7 +33,7 @@ int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 
 IntVec* transposeGraph(IntVec* adjList, int n)
 {
-	IntVec* transposedList = NULL;
+	IntVec* transposedList = calloc(n+1, sizeof(IntVec));
 	for (int i = 0; i <= n; i++) //initialize a new array of vectors.
 	{
 		transposedList[i] = intMakeEmptyVec();
@@ -52,10 +54,10 @@ void printAdjVerts(IntVec *adjList, int nodeCount) //Done
 	m = getEdgeCount(adjList);
 	//n = getNodeCount(adjList);
 
-	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n", n, m);
+	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
 	{
-		fprintf(stdout, "%d	  [", (w));
+		fprintf(stdout, "%d  [", (w));
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
 			fprintf(stdout, "%d", intData(adjList[w], u));
@@ -64,16 +66,19 @@ void printAdjVerts(IntVec *adjList, int nodeCount) //Done
 		}
 		fprintf(stdout, "]\n");
 	}
+	fprintf(stdout, "\n");
 }
 
 void printAdjMatrix(int** adjMatrix, int nodeCount)
 {
+	fprintf(stdout, "Matrix:\n");
 	fprintf(stdout, "     ");//alignment
 	for (int i = 1; i <= nodeCount; i++)
 	{
-		fprintf(stdout, "%d ", i);//horizontal index
+		fprintf(stdout, "%d  ", i);//horizontal index   added second space
 	}
-	fprintf(stdout, "\n   ------------------");
+	//fprintf(stdout, "\n   ------------------"); replaced by line below
+	fprintf(stdout, "\n");
 	for (int i = 1; i <= nodeCount; i++) //for each adjList[i]
 	{
 		fprintf(stdout, "\n%d :  ", i);
@@ -82,6 +87,7 @@ void printAdjMatrix(int** adjMatrix, int nodeCount)
 			fprintf(stdout, "%d  ", adjMatrix[i][j]);
 		}
 	}
+	fprintf(stdout, "\n\n");
 }
 
 
@@ -95,8 +101,13 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 	int tempInt = 0, dataValue = 0;
 	float weight = 0.00;
 	IntVec *tempList = NULL;
-	char *lineOfFile = "", *tempToken = "",
-		*tempDataValue = "", *tempWeight = "";
+	char *lineOfFile, *tempToken,
+		*tempDataValue, *tempWeight;
+	//begin the calloc's-------------------------------------------------
+	lineOfFile = calloc(15, sizeof(char));//trying to fix line 109-fgets()
+	tempToken = calloc(15, sizeof(char));
+	tempDataValue = calloc(15, sizeof(char));
+	tempWeight = calloc(15, sizeof(char));
 
 	//nodeCount = getNodeCount(inputFile);
 	tempList = calloc(nodeCount + 1, sizeof(IntVec));
@@ -127,9 +138,11 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 
 int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 {
-	char *tempString = "";
-	fscanf(inputFile, "%s", tempString); //load first line
-	return ((int)tempString[0] - (int)'0'); //convert string to int.
+	int temp = 0;
+	char tempString[5];// = calloc(10, sizeof(char));
+	fgets(tempString, 2, inputFile);//5 is arbitrary, only need 1 digit so i guess it could be 1.
+	//fscanf(inputFile, "%s", tempString); //load first line
+	return (int)((int)tempString[0] - (int)'0'); //convert string to int.
 }
 
 int getEdgeCount(IntVec *adjList) //Can call multiple times.
