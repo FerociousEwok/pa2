@@ -9,13 +9,29 @@ Ben Donn
 bdonn
 */
 
-int** makeAdjMatrix(IntVec *adjList)
+int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
-	return NULL;
+	int** adjMatrix;
+	//first initilize all values to 0.
+	for (int i = 1; i <= nodeCount; i++)//for each node. i.e. each index of array.
+	{
+		for (int j = 1; j <= nodeCount; j++) //for each node that adjList[i] could have an edge to.
+		{
+			for (int z = 0; z < intSize(adjList[i]); z++) //for each element in adjList[i]
+			{
+				if (intData(adjList[i], z) == j)//if adjList[i] has edge to adjList[j]
+					adjMatrix[i][j] = 1;
+				else
+					adjMatrix[i][j] = 0;
+			}
+		}
+	}
+	return adjMatrix;
 }
 
 IntVec* transposeGraph(IntVec* adjList, int n)
 {
+
 	return NULL;
 }
 
@@ -41,7 +57,7 @@ printAdjVerts(IntVec *adjList) //Done
 
 printAdjMatrix(int** adjMatrix)
 {
-	//todo next
+
 }
 
 

@@ -6,7 +6,7 @@ bdonn
 
 
 /**/
-int** makeAdjMatrix(IntVec *adjList);
+int** makeAdjMatrix(IntVec *adjList, int nodeCount);
 
 /**/
 IntVec* transposeGraph(IntVec* origGraph, int n);
@@ -24,7 +24,7 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag);
 int getNodeCount(FILE *inputFile);
 
 /**/
-IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount);
+//IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount);
 
 /**/
 int getEdgeCount(IntVec *adjList);

@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	char *tempInputString;
 	char *readMode = "r+";
 	IntVec *adjList;
-	char *flag = "Ben Donn";
+	char *flag = "default";
 	int nodeCount = 0;
 
 	if (argc == 1) //no command line argument
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 	}
 
 	nodeCount = getNodeCount(inputFile);
-	if (flag != "-U" || flag != "Ben Donn")//if bad command line input
+	if (flag != "-U" || flag != "default")//if bad command line input
 	{
 		fprintf(stderr, "Error reading command line input\nPress any key to close: ");
 		getc(stdin);
@@ -57,13 +57,13 @@ int main(int argc, char **argv)
 
 	printAdjVerts(adjList);
 	if (nodeCount <= 20)
-		printAdjMatrix(makeAdjMatrix(adjList));
+		printAdjMatrix(makeAdjMatrix(adjList, nodeCount));
 	for (int i = 0; i < 2; i++) //run twice; second transpose
 	{
 		adjList = transposeGraph(adjList, nodeCount); //adjList now transposedAdjList.
 		printAdjVerts(adjList);
 		if (nodeCount <= 20)
-			printAdjMatrix(makeAdjMatrix(adjList));
+			printAdjMatrix(makeAdjMatrix(adjList, nodeCount));
 	}
 
 	//free allocated memory--------------------------------------------------------
