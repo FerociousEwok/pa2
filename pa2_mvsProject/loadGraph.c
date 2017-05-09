@@ -31,8 +31,19 @@ int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 
 IntVec* transposeGraph(IntVec* adjList, int n)
 {
-
-	return NULL;
+	IntVec* transposedList;
+	for (int i = 0; i <= n; i++) //initialize a new array of vectors.
+	{
+		transposedList[i] = intMakeEmptyVec();
+	}
+	for (int i = 1; i <= n; i++)//traverse through adjList data
+	{
+		for (int j = 0; j < intSize(adjList[i]); j++)//for each element in adjList[i]->data
+		{
+			intVecPush(transposedList[intData(adjList[i], j)], i);//transpose from adjList to new vector array.
+		}
+	}
+	return transposedList;
 }
 
 printAdjVerts(IntVec *adjList) //Done
