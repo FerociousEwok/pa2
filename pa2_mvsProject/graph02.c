@@ -47,16 +47,13 @@ int main(int argc, char **argv)
 	}
 
 	nodeCount = getNodeCount(inputFile);
-	if (flag == "Ben Donn") //this could cause errors----------------------------------
-		adjList = loadGraph(inputFile);
-	else if (flag == "-U")
-		adjList = loadGraphUndirected(inputFile); //to be defined
-	else
+	if (flag != "-U" || flag != "Ben Donn")//if bad command line input
 	{
-		fprintf(stdout, "Error reading command line input\nPress any key to close: ");
+		fprintf(stderr, "Error reading command line input\nPress any key to close: ");
 		getc(stdin);
 		exit(1);
 	}
+	adjList = loadGraph(inputFile, nodeCount, flag);
 
 	printAdjVerts(adjList);
 	if (nodeCount <= 20)

@@ -49,7 +49,7 @@ printAdjMatrix(int** adjMatrix)
 The below function callocs an array of vectors and fills it based on inputFile
 	then returns a pointer to the array.
 */
-IntVec* loadGraph(FILE *inputFile, int nodeCount) //Done
+IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 {
 	//local variables
 	int nodeCount = 0, tempInt = 0, dataValue = 0;
@@ -76,10 +76,14 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount) //Done
 		//if there is a weight
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
+
 		intVecPush(tempList[tempInt], dataValue);
+		if (flag == "-U") //if undirected, add this edge also.
+			intVecPush(tempList[dataValue], tempInt);
 	}
 	return tempList;
 }
+/* 
 IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount) //edges go both ways; for each edge, edgeCount+=2.
 {
 	//local variables
@@ -113,7 +117,7 @@ IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount) //edges go both ways
 	}
 	return tempList;
 }
-
+*/
 int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 {
 	char *tempString;

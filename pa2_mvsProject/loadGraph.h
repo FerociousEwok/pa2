@@ -18,7 +18,7 @@ printAdjVerts(IntVec *adjList);
 printAdjMatrix(int** adjMatrix);
 
 /**/
-IntVec* loadGraph(FILE *inputFile, int nodeCount);
+IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag);
 
 /**/
 int getNodeCount(FILE *inputFile);
