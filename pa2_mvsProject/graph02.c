@@ -1,5 +1,5 @@
 /*
-graph01.c
+graph02.c
 Ben Donn
 bdonn
 pa2
