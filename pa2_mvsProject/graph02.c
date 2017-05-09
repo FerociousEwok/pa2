@@ -33,7 +33,7 @@ IntVec *adjList;
 int main( int argc, char **argv)
 {
 	//variables
-	char *flag[2];
+	char *flag;
 
 	if (argc == 1) //no command line argument
 	{
