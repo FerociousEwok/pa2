@@ -12,6 +12,7 @@ TODO: encapsulate global variables locally.
 #include <stdlib.h>
 #include <string.h>
 #include "intVec.h"
+#include "loadGraph.h"
 //global varialbes 
 int n; //number of nodes
 int m = 0; //number of edges
