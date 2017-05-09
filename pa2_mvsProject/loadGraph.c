@@ -46,11 +46,11 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 	return transposedList;
 }
 
-printAdjVerts(IntVec *adjList) //Done
+void printAdjVerts(IntVec *adjList, int nodeCount) //Done
 {
 	int n, m = 0;
 	m = getEdgeCount(adjList);
-	n = getNodeCount(adjList);
+	//n = getNodeCount(adjList);
 
 	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
@@ -66,7 +66,7 @@ printAdjVerts(IntVec *adjList) //Done
 	}
 }
 
-printAdjMatrix(int** adjMatrix, int nodeCount)
+void printAdjMatrix(int** adjMatrix, int nodeCount)
 {
 	fprintf(stdout, "     ");//alignment
 	for (int i = 1; i <= nodeCount; i++)
@@ -92,7 +92,7 @@ The below function callocs an array of vectors and fills it based on inputFile
 IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 {
 	//local variables
-	int nodeCount = 0, tempInt = 0, dataValue = 0;
+	int tempInt = 0, dataValue = 0;
 	float weight;
 	IntVec *tempList;
 	char *lineOfFile, *tempToken, *tempDataValue, *tempWeight;

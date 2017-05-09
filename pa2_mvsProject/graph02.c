@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 {
 	//variables
 	FILE *inputFile = NULL;
-	char *tempInputString;
+	char *tempInputString = "";
 	char *readMode = "r+";
 	IntVec *adjList;
 	char *flag = "default";
@@ -55,13 +55,13 @@ int main(int argc, char **argv)
 	}
 	adjList = loadGraph(inputFile, nodeCount, flag);
 
-	printAdjVerts(adjList);
+	printAdjVerts(adjList, nodeCount);
 	if (nodeCount <= 20)
 		printAdjMatrix(makeAdjMatrix(adjList, nodeCount), nodeCount);
 	for (int i = 0; i < 2; i++) //run twice; second transpose
 	{
 		adjList = transposeGraph(adjList, nodeCount); //adjList now transposedAdjList.
-		printAdjVerts(adjList);
+		printAdjVerts(adjList, nodeCount);
 		if (nodeCount <= 20)
 			printAdjMatrix(makeAdjMatrix(adjList, nodeCount), nodeCount);
 	}
@@ -71,8 +71,8 @@ int main(int argc, char **argv)
 		free(adjList[i]);
 	free(adjList);
 	fprintf(stdout, "Program completed with no errors, exiting...");
-	delay(5000);//wait a few seconds then close
-	//getc(stdin);
+	//delay(5000);//wait a few seconds then close
+	getc(stdin);
 	return EXIT_SUCCESS;
 }
 	/* 
