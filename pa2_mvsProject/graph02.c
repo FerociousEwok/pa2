@@ -70,6 +70,18 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
+	printAdjVerts(adjList);
+	if (nodeCount <= 20)
+		printAdjMatrix(makeAdjMatrix(adjList));
+	for (int i = 0; i < 2; i++) //run twice; second transpose
+	{
+		adjList = transposeGraph(adjList, nodeCount); //adjList now transposedAdjList.
+		printAdjVerts(adjList);
+		if (nodeCount <= 20)
+			printAdjMatrix(makeAdjMatrix(adjList));
+	}
+
+
 	/* now in loadGraph.c-----------------------------------------------------------
 
 	fscanf(inputFile, "%s", tempString); //load first line

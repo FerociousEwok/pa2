@@ -50,7 +50,7 @@ The below function callocs an array of vectors and fills it based on inputFile
 IntVec* loadGraph(FILE *inputFile) //Done
 {
 	//local variables
-	int nodeCount = 0, edgeCount = 0, tempInt = 0, dataValue = 0;
+	int nodeCount = 0, tempInt = 0, dataValue = 0;
 	float weight;
 	IntVec *tempList;
 	char *lineOfFile, *tempToken, *tempDataValue, *tempWeight;
@@ -75,7 +75,6 @@ IntVec* loadGraph(FILE *inputFile) //Done
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
 		intVecPush(tempList[tempInt], dataValue);
-		edgeCount += 1;
 	}
 	return tempList;
 }
@@ -91,7 +90,7 @@ int getNodeCount(FILE *inputFile) //Done
 	return ((int)tempString[0] - (int)'0'); //convert string to int.
 }
 
-int getEdgeCount(IntVec *adjList)
+int getEdgeCount(IntVec *adjList) //Done
 {
 	int n, m = 0;
 	n = sizeof(adjList); //the 0 index is not a vector, so subtract one for number of vectors.
