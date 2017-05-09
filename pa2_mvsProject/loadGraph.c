@@ -47,29 +47,41 @@ printAdjMatrix(int** adjMatrix)
 	//todo next
 }
 
+
+/*
+The below function callocs an array of vectors and fills it based on inputFile
+	then returns a pointer to the array.
+*/
 IntVec* loadGraph(FILE *inputFile) //process inputfile and store in adjList array
 {
-	fscanf(inputFile, "%s", tempString); //load first line
-	n = (int)tempString[0] - (int)'0'; //convert string to int.
-	tempString[0] = '\0';  //clear tempstring first char
+	//local variables
+	int nodeCount = 0, edgeCount = 0, tempInt = 0, dataValue = 0;
+	float weight;
+	IntVec *tempList;
+	char *lineOfFile, *tempToken, *tempDataValue, *tempWeight;
 
 
-	adjList = calloc(n + 1, sizeof(IntVec));  //creates array of vector nodes
-	for (int i = 0; i <= n; i++)  //fill array with vector nodes
+	nodeCount = getNodeCount(inputFile);
+
+
+
+
+	tempList = calloc(nodeCount + 1, sizeof(IntVec));  //creates array of vector nodes
+	for (int i = 0; i <= nodeCount; i++)  //fill array with vector nodes
 	{
-		adjList[i] = intMakeEmptyVec();
+		tempList[i] = intMakeEmptyVec();
 	}
 	//below is some input file cleanup
 	for (int i = 0; i < 1; i++)
-		fgets(tempString, 20, inputFile);
+		fgets(lineOfFile, 20, inputFile);
 
 	//now time to read each line of input and load array as we go.
-	while ((fgets(tempString, 20, inputFile) != NULL)) //for each line of the file.
+	while ((fgets(lineOfFile, 20, inputFile) != NULL)) //for each line of the file.
 	{
-		if (tempString[0] == '\n') //if fgets needed to clear newline character
-			fgets(tempString, 20, inputFile);
+		if (lineOfFile[0] == '\n') //if fgets needed to clear newline character
+			fgets(lineOfFile, 20, inputFile);
 
-		sscanf(tempString, "%s %s %s", tempToken, tempDataValue, tempWeight);
+		sscanf(lineOfFile, "%s %s %s", tempToken, tempDataValue, tempWeight);
 		//get first token
 		tempInt = (int)tempToken[0] - (int)'0';
 		//get second token
@@ -78,14 +90,17 @@ IntVec* loadGraph(FILE *inputFile) //process inputfile and store in adjList arra
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
 
-		intVecPush(adjList[tempInt], dataValue); //add element in proper location.
-		m += 1;
-
-		return NULL;
+		intVecPush(tempList[tempInt], dataValue); //add element in proper location.
+		edgeCount += 1;
 	}
+	return tempList;
 }
 
 int getNodeCount(FILE *inputFile)
 {
-	return 0;
+	char *tempString;
+
+	fscanf(inputFile, "%s", tempString); //load first line
+	return ((int)tempString[0] - (int)'0'); //convert string to int.
+	//tempString[0] = '\0';  //dont need to clear tempstring anymore. due to encapsulation.
 }

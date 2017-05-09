@@ -62,6 +62,7 @@ int main(int argc, char **argv)
 	}
 
 	nodeCount = getNodeCount(inputFile);//function to be defined
+	adjList = loadGraph(inputFile); //load all edges into array of vector nodes.
 
 	/* now in loadGraph.c-----------------------------------------------------------
 
