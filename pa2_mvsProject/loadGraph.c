@@ -23,10 +23,12 @@ printAdjVerts(IntVec *adjList) //Done
 {
 	int n, m = 0;
 	m = getEdgeCount(adjList);
-	fprintf(stdout, "n = %d\nm = %d\n", n, m);
+	n = getNodeCount(adjList);
+
+	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
 	{
-		fprintf(stdout, "%d		[", (w));
+		fprintf(stdout, "%d	  [", (w));
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
 			fprintf(stdout, "%d", intData(adjList[w], u));

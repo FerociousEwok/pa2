@@ -14,25 +14,13 @@ TODO: encapsulate global variables locally.
 #include <string.h>
 #include "intVec.h"
 #include "loadGraph.h"
-//global varialbes 
-//int n; //number of nodes
-//int m = 0; //number of edges
-int tempInt;
-int dataValue;
-float weight;
-char tempDataValue[10];
-char tempWeight[10];
-FILE *inputFile = NULL;
-char tempString[20];
-char tempToken[10];
-char *tempInputString;
-char *readMode = "r+";
-char **linesOfFile;
-
 
 int main(int argc, char **argv)
 {
 	//variables
+	FILE *inputFile = NULL;
+	char *tempInputString;
+	char *readMode = "r+";
 	IntVec *adjList;
 	char *flag = "Ben Donn";
 	int nodeCount = 0;
