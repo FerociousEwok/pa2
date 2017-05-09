@@ -18,13 +18,13 @@ printAdjVerts(IntVec *adjList);
 printAdjMatrix(int** adjMatrix);
 
 /**/
-IntVec* loadGraph(FILE *inputFile);
+IntVec* loadGraph(FILE *inputFile, int nodeCount);
 
 /**/
 int getNodeCount(FILE *inputFile);
 
 /**/
-IntVec* loadGraphUndirected(FILE *inputFile);
+IntVec* loadGraphUndirected(FILE *inputFile, int nodeCount);
 
 /**/
 int getEdgeCount(IntVec *adjList);
