@@ -28,7 +28,7 @@ char *readMode = "r+";
 char **linesOfFile;
 
 
-IntVec *linkedListArray;
+IntVec *adjList;
 
 int main( int argc, char **argv)
 {
@@ -53,7 +53,7 @@ int main( int argc, char **argv)
 	
 	if (inputFile == 0)
 	{
-		perror("fopen(): ");
+		fprintf(stderr, "fopen() error");
 		//exit(1);
 	}
 	
@@ -62,10 +62,10 @@ int main( int argc, char **argv)
 	tempString[0] = '\0';  //clear tempstring first char
 
 
-	linkedListArray = calloc(n+1, sizeof(IntVec));  //creates array of vector nodes
+	adjList = calloc(n+1, sizeof(IntVec));  //creates array of vector nodes
 	for (int i = 0; i <= n; i++)  //fill array with vector nodes
 	{
-		linkedListArray[i] = intMakeEmptyVec();
+		adjList[i] = intMakeEmptyVec();
 	}
 	//below is some input file cleanup
 	for (int i = 0; i < 1; i++)
@@ -86,7 +86,7 @@ int main( int argc, char **argv)
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
 
-		intVecPush(linkedListArray[tempInt], dataValue); //add element in proper location.
+		intVecPush(adjList[tempInt], dataValue); //add element in proper location.
 		m += 1;
 		
 	}
@@ -95,11 +95,11 @@ int main( int argc, char **argv)
 	for (int w = 1; w <= n; w++) //for each node
 	{
 		printf("%d		[", (w));
-		for (int u = 0; u < intSize(linkedListArray[w]); u++) //for each edge from that node
+		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
-			printf("%d",intData(linkedListArray[w], u)); 
+			printf("%d",intData(adjList[w], u)); 
 			
-			if (u<intSize(linkedListArray[w])-1) //if its not the last element
+			if (u<intSize(adjList[w])-1) //if its not the last element
 			{
 				printf(", ");
 			}
@@ -108,7 +108,7 @@ int main( int argc, char **argv)
 	}
 	fclose(inputFile);
 	for(int i = 0; i<=n; i++)
-		free(linkedListArray[i]);
-	free(linkedListArray);
+		free(adjList[i]);
+	free(adjList);
 	getc(stdin);
 }
