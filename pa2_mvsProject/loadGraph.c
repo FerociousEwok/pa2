@@ -39,6 +39,7 @@ int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 
 IntVec* transposeGraph(IntVec* adjList, int n)
 {
+	int data = 0;
 	IntVec* transposedList = calloc(n+1, sizeof(IntVec));
 	for (int i = 0; i <= n; i++) //initialize a new array of vectors.
 	{
@@ -49,7 +50,9 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 	{
 		for (int j = 0; j < intSize(adjList[i]); j++)//for each element in adjList[i]->data
 		{
-			intVecPush(transposedList[intData(adjList[i], j)], i);//transpose from adjList to new vector array.
+			data = intData(adjList[i], j);
+			if(data >=0) //added to avoid bad number
+				intVecPush(transposedList[data], i);//transpose from adjList to new vector array.
 		}
 	}
 	return transposedList;
@@ -57,7 +60,7 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 
 void printAdjVerts(IntVec *adjList, int nodeCount)
 {
-	int n = nodeCount, m = 0;
+	int n = nodeCount, m = 0, data = 0;
 	m = getEdgeCount(adjList);
 
 	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n\n", n, m);
@@ -66,9 +69,12 @@ void printAdjVerts(IntVec *adjList, int nodeCount)
 		fprintf(stdout, "%d  [", (w));
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
-			fprintf(stdout, "%d", intData(adjList[w], u));
-			if (u<intSize(adjList[w]) - 1) //if its not the last element
-				fprintf(stdout, ", ");
+			data = intData(adjList[w], u);
+			//if (data < 0)//this might mess up alignment
+				fprintf(stdout, "%d", data);
+				if (u < intSize(adjList[w]) - 1) //if its not the last element
+					fprintf(stdout, ", ");
+			
 		}
 		fprintf(stdout, "]\n");
 	}

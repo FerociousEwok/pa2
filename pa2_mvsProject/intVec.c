@@ -114,7 +114,7 @@ The following is the Integer vector node adt.
 			fprintf(stderr, "Error: myVec == NULL");
 			exit(EXIT_FAILURE);
 		}
-		if (intSize(myVec) == intCapacity(myVec)) //if *data is full. array double.  
+		if (intSize(myVec)-1 == intCapacity(myVec)) //added -1. why not
 		{
 			myVec->data = (int*)realloc(myVec->data, (intSize(myVec)) * 2);
 			if (myVec->data == NULL) //if realloc failed.
