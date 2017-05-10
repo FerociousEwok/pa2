@@ -119,7 +119,7 @@ The following is the Integer vector node adt.
 		//replacing 
 		if (intSize(myVec) == intCapacity(myVec)) //All praise intSize(myVec)-3 
 		{
-			myVec->data = (int*)realloc(myVec->data, (intSize(myVec)) * 2);
+			myVec->data = (int*)realloc(myVec->data, (sizeof(int) * (intSize(myVec)) * 2));//found her
 			if (myVec->data == NULL) //if realloc failed.
 			{
 				fprintf(stderr, "Error: realloc failed");
