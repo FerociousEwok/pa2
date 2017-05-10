@@ -9,6 +9,7 @@ Ben Donn
 bdonn
 pa2
 */
+int globalEdgeCount = 0;
 
 int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
@@ -147,9 +148,13 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag)
 			weight = (float)tempWeight[0] - (float)'0';
 
 			intVecPush(tempList[tempInt], dataValue);
+			globalEdgeCount++;
 			equal = strcmp(flag, "-U");
-		if (equal == 0) //if undirected
-			intVecPush(tempList[dataValue], tempInt);
+			if (equal == 0) //if undirected
+			{
+				intVecPush(tempList[dataValue], tempInt);
+				globalEdgeCount++;
+			}
 	}
 	return tempList;
 }
@@ -165,11 +170,14 @@ int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 
 int getEdgeCount(IntVec *adjList) //Can call multiple times.
 {
+	return globalEdgeCount;
+	/*
 	fprintf(stdout, "congrats, made it to getEdgeCount\n");
-	int n, m = 0;
-	n = sizeof(adjList) / sizeof(IntVec); //no works right.
+	int n = 0, m = 0;
+	n = sizeof(adjList) / sizeof(IntVec); //no it doesnt.
 	n -= 1;
 	for (int i = 0; i < n; i++)
 		m += intSize(adjList[i]);
 	return m;
+	*/
 }
