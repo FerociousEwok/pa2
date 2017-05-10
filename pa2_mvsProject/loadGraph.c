@@ -135,11 +135,10 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag)
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
 
-		equal = strcmp(flag, "-U");
-		if (equal == 0) //if undirected, add this edge also.
-			intVecPush(tempList[dataValue], tempInt);
-		else
 			intVecPush(tempList[tempInt], dataValue);
+			equal = strcmp(flag, "-U");
+		if (equal == 0) //if undirected
+			intVecPush(tempList[dataValue], tempInt);
 	}
 	return tempList;
 }
