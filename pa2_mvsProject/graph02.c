@@ -71,13 +71,10 @@ int main(int argc, char **argv)
 	}
 
 	//free allocated memory--------------------------------------------------------
-	int i = 0;
-	while (adjList[i] != NULL)
-	{
-		free(adjList[i]);
-		i++;
-	}
-	free(adjList);
+	
+	//for(int i = 0; i < nodeCount; i++)
+		//if(adjList[i] != NULL)
+			//free(adjList[i]);
 	fprintf(stdout, "Program completed with no errors, Press any key to exit: ");
 	getc(stdin);
 	return EXIT_SUCCESS;
