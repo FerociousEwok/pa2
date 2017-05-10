@@ -61,6 +61,7 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 void printAdjVerts(IntVec *adjList, int nodeCount)
 {
 	int n = nodeCount, m = 0, data = 0;
+	int debug = 0;
 	m = getEdgeCount(adjList);
 
 	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n\n", n, m);
@@ -70,9 +71,12 @@ void printAdjVerts(IntVec *adjList, int nodeCount)
 		for (int u = 0; u < intSize(adjList[w]); u++) //for each edge from that node
 		{
 			data = intData(adjList[w], u);
+
 			//if (data < 0)//this might mess up alignment
+				//fprintf(stdout, "%d", (int*)data);//maybe-------------------------
+			//else
 				fprintf(stdout, "%d", data);
-				if (u < intSize(adjList[w]) - 1) //if its not the last element
+			if (u < intSize(adjList[w]) - 1) //if its not the last element
 					fprintf(stdout, ", ");
 			
 		}
@@ -118,9 +122,9 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag)
 	char *lineOfFile, *tempToken,
 		*tempDataValue, *tempWeight;
 	//begin the calloc's-------------------------------------------------
-	lineOfFile = calloc(15, sizeof(char));
-	tempToken = calloc(15, sizeof(char));
-	tempDataValue = calloc(15, sizeof(char));
+	lineOfFile = calloc(30, sizeof(char));
+	tempToken = calloc(30, sizeof(char));
+	tempDataValue = calloc(30, sizeof(char));
 	tempWeight = calloc(15, sizeof(char));
 
 	

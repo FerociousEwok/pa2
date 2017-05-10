@@ -42,12 +42,14 @@ The following is the Integer vector node adt.
 	*/
 	int intData(IntVec myVec, int i)
 	{
+		int temp = 0;
 		if (!(i >= 0 && i < myVec->sz)) //if precondition fails.
 		{
 			fprintf(stderr, "Error: (0 <= i < intSize(myVec)) not true.");
 			exit( 0);
 		}
-		return myVec->data[i];
+		temp = myVec->data[i];
+		return temp;
 	}
 
 	/** intSize()
@@ -114,7 +116,8 @@ The following is the Integer vector node adt.
 			fprintf(stderr, "Error: myVec == NULL");
 			exit(EXIT_FAILURE);
 		}
-		if (intSize(myVec)-1 == intCapacity(myVec)) //added -1. why not
+		//replacing 
+		if (intSize(myVec) == intCapacity(myVec)) //All praise intSize(myVec)-3 
 		{
 			myVec->data = (int*)realloc(myVec->data, (intSize(myVec)) * 2);
 			if (myVec->data == NULL) //if realloc failed.
