@@ -10,7 +10,7 @@ bdonn
 /*
 
 */
-int** makeAdjMatrix(IntVec *adjList, int nodeCount);//int nodeCount 
+int** makeAdjMatrix(IntVec *adjList, int nodeCount);
 
 /*
 

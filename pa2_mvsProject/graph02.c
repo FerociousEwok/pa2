@@ -3,9 +3,6 @@ graph02.c
 Ben Donn
 bdonn
 pa2
-
-TODO: encapsulate global variables locally.
-
 */
 
 
@@ -39,7 +36,7 @@ int main(int argc, char **argv)
 		flag = argv[1];
 		tempInputString = argv[2];
 	}
-	inputFile = fopen(tempInputString, readMode); //create file
+	inputFile = fopen(tempInputString, readMode);
 	if (inputFile == 0)
 	{
 		fprintf(stderr, "fopen() error\nPress any key to close: ");
@@ -58,6 +55,7 @@ int main(int argc, char **argv)
 	}
 	adjList = loadGraph(inputFile, nodeCount, flag);
 
+	fprintf(stdout, "FLAG == %s\n\n", flag);
 	fprintf(stdout, "----Original adjList----\n\n");
 	printAdjVerts(adjList, nodeCount);
 	if (nodeCount <= 20)
@@ -77,7 +75,6 @@ int main(int argc, char **argv)
 		free(adjList[i]);
 	free(adjList);
 	fprintf(stdout, "Program completed with no errors, Press any key to exit: ");
-	//delay(5000);//wait a few seconds then close
 	getc(stdin);
 	return EXIT_SUCCESS;
 }

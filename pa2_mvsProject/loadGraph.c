@@ -11,7 +11,7 @@ bdonn
 
 int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
-	int** adjMatrix = calloc(nodeCount, sizeof(int *)); //of by on potential
+	int** adjMatrix = calloc(nodeCount, sizeof(int *));
 	int dataValue = 0;
 	for (int i = 0; i <= nodeCount; i++)
 		adjMatrix[i] = calloc(nodeCount, sizeof(int));
@@ -27,7 +27,7 @@ int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 				{
 					adjMatrix[i][j] = 1;
 				}
-				else if(adjMatrix[i][j] != 1)//set to one properly but then overided correct data.
+				else if(adjMatrix[i][j] != 1)
 				{
 					adjMatrix[i][j] = 0;
 				}
@@ -55,11 +55,10 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 	return transposedList;
 }
 
-void printAdjVerts(IntVec *adjList, int nodeCount) //Done
+void printAdjVerts(IntVec *adjList, int nodeCount)
 {
 	int n = nodeCount, m = 0;
 	m = getEdgeCount(adjList);
-	//n = getNodeCount(adjList);
 
 	fprintf(stdout, "nodeCount = %d\nedgeCount = %d\n\n", n, m);
 	for (int w = 1; w <= n; w++) //for each node
@@ -79,12 +78,11 @@ void printAdjVerts(IntVec *adjList, int nodeCount) //Done
 void printAdjMatrix(int** adjMatrix, int nodeCount)
 {
 	fprintf(stdout, "Matrix:\n");
-	fprintf(stdout, "     ");//alignment
+	fprintf(stdout, "     ");
 	for (int i = 1; i <= nodeCount; i++)
 	{
-		fprintf(stdout, "%d  ", i);//horizontal index   added second space
+		fprintf(stdout, "%d  ", i);
 	}
-	//fprintf(stdout, "\n   ------------------"); replaced by line below
 	fprintf(stdout, "\n");
 	for (int i = 1; i <= nodeCount; i++) //for each adjList[i]
 	{
@@ -105,21 +103,21 @@ void printAdjMatrix(int** adjMatrix, int nodeCount)
 The below function callocs an array of vectors and fills it based on inputFile
 	then returns a pointer to the array.
 */
-IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
+IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag)
 {
 	//local variables
-	int tempInt = 0, dataValue = 0;
+	int tempInt = 0, dataValue = 0, equal = 0;
 	float weight = 0.00;
 	IntVec *tempList = NULL;
 	char *lineOfFile, *tempToken,
 		*tempDataValue, *tempWeight;
 	//begin the calloc's-------------------------------------------------
-	lineOfFile = calloc(15, sizeof(char));//trying to fix line 109-fgets()
+	lineOfFile = calloc(15, sizeof(char));
 	tempToken = calloc(15, sizeof(char));
 	tempDataValue = calloc(15, sizeof(char));
 	tempWeight = calloc(15, sizeof(char));
 
-	//nodeCount = getNodeCount(inputFile);
+	
 	tempList = calloc(nodeCount + 1, sizeof(IntVec));
 	for (int i = 0; i <= nodeCount; i++)
 		tempList[i] = intMakeEmptyVec();
@@ -131,17 +129,17 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 		if (lineOfFile[0] == '\n') //if fgets needed to clear newline character
 			fgets(lineOfFile, 20, inputFile);
 		sscanf(lineOfFile, "%s %s %s", tempToken, tempDataValue, tempWeight);
-		//get first token
+
 		tempInt = (int)tempToken[0] - (int)'0';
-		//get second token
 		dataValue = (int)tempDataValue[0] - (int)'0';
-		//if there is a weight
 		if (!((float)tempWeight[0] == 0.00))
 			weight = (float)tempWeight[0] - (float)'0';
 
-		intVecPush(tempList[tempInt], dataValue);
-		if (flag == "-U") //if undirected, add this edge also.
+		equal = strcmp(flag, "-U");
+		if (equal == 0) //if undirected, add this edge also.
 			intVecPush(tempList[dataValue], tempInt);
+		else
+			intVecPush(tempList[tempInt], dataValue);
 	}
 	return tempList;
 }
@@ -149,9 +147,9 @@ IntVec* loadGraph(FILE *inputFile, int nodeCount, char* flag) //Done
 int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 {
 	int temp = 0;
-	char tempString[5];// = calloc(10, sizeof(char));
-	fgets(tempString, 2, inputFile);//5 is arbitrary, only need 1 digit so i guess it could be 1.
-	//fscanf(inputFile, "%s", tempString); //load first line
+	char tempString[5];
+	fgets(tempString, 2, inputFile);
+	
 	return (int)((int)tempString[0] - (int)'0'); //convert string to int.
 }
 
