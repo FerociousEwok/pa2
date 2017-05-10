@@ -117,7 +117,7 @@ The following is the Integer vector node adt.
 			exit(EXIT_FAILURE);
 		}
 		//replacing 
-		if (intSize(myVec) == intCapacity(myVec)) //All praise intSize(myVec)-3 
+		if (intSize(myVec) == intCapacity(myVec))
 		{
 			myVec->data = (int*)realloc(myVec->data, (sizeof(int) * (intSize(myVec)) * 2));//found her
 			if (myVec->data == NULL) //if realloc failed.

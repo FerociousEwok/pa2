@@ -1,4 +1,7 @@
 /* intVec.h
+ * Ben Donn
+ * bdonn
+ * pa2
  * the purpose of this file is to define functions for intvec.c
  */
 
