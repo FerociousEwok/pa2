@@ -165,10 +165,11 @@ int getNodeCount(FILE *inputFile) //Only call once or there might be errors.
 
 int getEdgeCount(IntVec *adjList) //Can call multiple times.
 {
+	fprintf(stdout, "congrats, made it to getEdgeCount\n");
 	int n, m = 0;
-	n = sizeof(adjList);
+	n = sizeof(adjList) / sizeof(IntVec); //no works right.
 	n -= 1;
-	for (int i = n; i > 0; i--)
+	for (int i = 0; i < n; i++)
 		m += intSize(adjList[i]);
 	return m;
 }
