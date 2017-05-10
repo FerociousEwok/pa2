@@ -71,12 +71,8 @@ int main(int argc, char **argv)
 	}
 
 	//free allocated memory--------------------------------------------------------
-	int i = 0;
-	while (adjList[i] != NULL)
-	{
+	for (int i = 0; i <= sizeof(adjList); i++)
 		free(adjList[i]);
-		i++;
-	}
 	free(adjList);
 	fprintf(stdout, "Program completed with no errors, Press any key to exit: ");
 	getc(stdin);
