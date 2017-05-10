@@ -12,19 +12,25 @@ bdonn
 int** makeAdjMatrix(IntVec *adjList, int nodeCount)
 {
 	int** adjMatrix = calloc(nodeCount, sizeof(int *)); //of by on potential
+	int dataValue = 0;
 	for (int i = 0; i <= nodeCount; i++)
 		adjMatrix[i] = calloc(nodeCount, sizeof(int));
-	//first initilize all values to 0.
+
 	for (int i = 1; i <= nodeCount; i++)//for each node. i.e. each index of array.
 	{
 		for (int j = 1; j <= nodeCount; j++) //for each node that adjList[i] could have an edge to.
 		{
-			for (int z = 0; z < intSize(adjList[i]); z++) //for each element in adjList[i]
+			for (int z = 0; z < intSize(adjList[i]); z++) //for each element in adjList[i]->data
 			{
-				if (intData(adjList[i], z) == j)//if adjList[i] has edge to adjList[j]
+				dataValue = intData(adjList[i], z);
+				if (dataValue == j)//if adjList[i] has edge to adjList[j]
+				{
 					adjMatrix[i][j] = 1;
-				else
+				}
+				else if(adjMatrix[i][j] != 1)//set to one properly but then overided correct data.
+				{
 					adjMatrix[i][j] = 0;
+				}
 			}
 		}
 	}
@@ -38,6 +44,7 @@ IntVec* transposeGraph(IntVec* adjList, int n)
 	{
 		transposedList[i] = intMakeEmptyVec();
 	}
+
 	for (int i = 1; i <= n; i++)//traverse through adjList data
 	{
 		for (int j = 0; j < intSize(adjList[i]); j++)//for each element in adjList[i]->data
@@ -84,7 +91,10 @@ void printAdjMatrix(int** adjMatrix, int nodeCount)
 		fprintf(stdout, "\n%d :  ", i);
 		for (int j = 1; j <= nodeCount; j++) //for each potential edge
 		{
-			fprintf(stdout, "%d  ", adjMatrix[i][j]);
+			if(adjMatrix[i][j] == 0 || adjMatrix[i][j] == 1)//needed in case where intSize(vector) == 0
+				fprintf(stdout, "%d  ", adjMatrix[i][j]);
+			else
+				fprintf(stdout, "0  ");
 		}
 	}
 	fprintf(stdout, "\n\n");
